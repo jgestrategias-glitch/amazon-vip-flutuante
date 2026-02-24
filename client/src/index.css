@@ -43,83 +43,123 @@
 }
 
 :root {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-600);
-  --sidebar-primary-foreground: var(--color-blue-50);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  /* Amazon VIP Flutuante - Minimalismo Orgânico com Materialidade Natural */
+  
+  /* Cores Primárias */
+  --forest-dark: #1B4D3E;
+  --forest-light: #2D6A54;
+  --beige-light: #F5F1E8;
+  --gold-subtle: #D4AF37;
+  --gold-light: #E8D5B7;
+  
+  /* Paleta Tailwind */
+  --primary: var(--forest-dark);
+  --primary-foreground: var(--beige-light);
+  --sidebar-primary: var(--forest-dark);
+  --sidebar-primary-foreground: var(--beige-light);
+  --chart-1: var(--forest-dark);
+  --chart-2: var(--forest-light);
+  --chart-3: var(--gold-subtle);
+  --chart-4: var(--gold-light);
+  --chart-5: var(--beige-light);
+  
   --radius: 0.65rem;
-  --background: oklch(1 0 0);
+  --background: oklch(0.98 0.001 60);
   --foreground: oklch(0.235 0.015 65);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.235 0.015 65);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.235 0.015 65);
-  --secondary: oklch(0.98 0.001 286.375);
-  --secondary-foreground: oklch(0.4 0.015 65);
+  --secondary: var(--forest-light);
+  --secondary-foreground: oklch(1 0 0);
   --muted: oklch(0.967 0.001 286.375);
   --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.141 0.005 285.823);
+  --accent: var(--gold-subtle);
+  --accent-foreground: var(--forest-dark);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(0.92 0.004 286.32);
   --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.623 0.214 259.815);
+  --ring: var(--forest-dark);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.235 0.015 65);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.141 0.005 285.823);
+  --sidebar-accent: var(--gold-subtle);
+  --sidebar-accent-foreground: var(--forest-dark);
   --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.623 0.214 259.815);
+  --sidebar-ring: var(--forest-dark);
 }
 
 .dark {
-  --primary: var(--color-blue-700);
-  --primary-foreground: var(--color-blue-50);
-  --sidebar-primary: var(--color-blue-500);
-  --sidebar-primary-foreground: var(--color-blue-50);
+  --primary: var(--forest-light);
+  --primary-foreground: var(--beige-light);
+  --sidebar-primary: var(--forest-light);
+  --sidebar-primary-foreground: var(--beige-light);
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.85 0.005 65);
   --card: oklch(0.21 0.006 285.885);
   --card-foreground: oklch(0.85 0.005 65);
   --popover: oklch(0.21 0.006 285.885);
   --popover-foreground: oklch(0.85 0.005 65);
-  --secondary: oklch(0.24 0.006 286.033);
+  --secondary: var(--forest-light);
   --secondary-foreground: oklch(0.7 0.005 65);
   --muted: oklch(0.274 0.006 286.033);
   --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground:  oklch(0.92 0.005 65);
+  --accent: var(--gold-subtle);
+  --accent-foreground: oklch(0.92 0.005 65);
   --destructive: oklch(0.704 0.191 22.216);
   --destructive-foreground: oklch(0.985 0 0);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.488 0.243 264.376);
-  --chart-1: var(--color-blue-300);
-  --chart-2: var(--color-blue-500);
-  --chart-3: var(--color-blue-600);
-  --chart-4: var(--color-blue-700);
-  --chart-5: var(--color-blue-800);
+  --ring: var(--gold-subtle);
+  --chart-1: var(--forest-light);
+  --chart-2: var(--forest-dark);
+  --chart-3: var(--gold-subtle);
+  --chart-4: var(--gold-light);
+  --chart-5: var(--beige-light);
   --sidebar: oklch(0.21 0.006 285.885);
   --sidebar-foreground: oklch(0.85 0.005 65);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground:  oklch(0.985 0 0);
+  --sidebar-accent: var(--gold-subtle);
+  --sidebar-accent-foreground: oklch(0.235 0.015 65);
   --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.488 0.243 264.376);
+  --sidebar-ring: var(--gold-subtle);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-family: 'Lato', sans-serif;
   }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--forest-dark);
+  }
+  
+  h1 {
+    @apply text-5xl md:text-6xl;
+  }
+  
+  h2 {
+    @apply text-4xl md:text-5xl;
+  }
+  
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+  
+  p {
+    font-family: 'Lato', sans-serif;
+    @apply text-base leading-relaxed;
+    letter-spacing: 0.3px;
+  }
+  
   button:not(:disabled),
   [role="button"]:not([aria-disabled="true"]),
   [type="button"]:not(:disabled),
@@ -173,5 +213,100 @@
       padding-right: 2rem;
       max-width: 1280px; /* Standard content width */
     }
+  }
+  
+  /* Custom utilities for Amazon VIP Flutuante design */
+  
+  .text-heading {
+    color: var(--forest-dark);
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+  }
+  
+  .text-body {
+    color: #374151;
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .btn-primary {
+    background-color: var(--forest-dark);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    transition: all 0.6s;
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--forest-light);
+  }
+  
+  .btn-primary:active {
+    transform: scale(0.95);
+  }
+  
+  .btn-secondary {
+    border: 2px solid var(--forest-dark);
+    color: var(--forest-dark);
+    padding: 0.75rem 2rem;
+    border-radius: 0;
+    font-family: 'Lato', sans-serif;
+    font-weight: 600;
+    transition: all 0.6s;
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--forest-dark);
+    color: white;
+  }
+  
+  .card-minimal {
+    background-color: white;
+    border-radius: 0;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    transition: box-shadow 0.6s;
+  }
+  
+  .card-minimal:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .divider-organic {
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(27, 77, 62, 0.2), transparent);
+  }
+  
+  @media (min-width: 768px) {
+    .divider-organic {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.8s ease-in-out forwards;
+    opacity: 0;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }

@@ -1,25 +1,34 @@
-import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
-import { Streamdown } from 'streamdown';
+import { useState } from "react";
+import Header from "@/components/Header";
+import HeroSection from "@/components/HeroSection";
+import Gallery from "@/components/Gallery";
+import Differentials from "@/components/Differentials";
+import Testimonials from "@/components/Testimonials";
+import Footer from "@/components/Footer";
+import ReservationModal from "@/components/ReservationModal";
 
-/**
- * All content in this page are only for example, replace with your own feature implementation
- * When building pages, remember your instructions in Frontend Best Practices, Design Guide and Common Pitfalls
- */
 export default function Home() {
-  // If theme is switchable in App.tsx, we can implement theme toggling like this:
-  // const { theme, toggleTheme } = useTheme();
+  const [isReservationOpen, setIsReservationOpen] = useState(false);
+
+  const handleReserveClick = () => {
+    setIsReservationOpen(true);
+  };
+
+  const handleCloseReservation = () => {
+    setIsReservationOpen(false);
+  };
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main>
-        {/* Example: lucide-react for icons */}
-        <Loader2 className="animate-spin" />
-        Example Page
-        {/* Example: Streamdown for markdown rendering */}
-        <Streamdown>Any **markdown** content</Streamdown>
-        <Button variant="default">Example Button</Button>
+    <div className="min-h-screen flex flex-col bg-white">
+      <Header onReserveClick={handleReserveClick} />
+      <main className="flex-1">
+        <HeroSection onReserveClick={handleReserveClick} />
+        <Gallery />
+        <Differentials />
+        <Testimonials />
       </main>
+      <Footer />
+      <ReservationModal isOpen={isReservationOpen} onClose={handleCloseReservation} />
     </div>
   );
 }
