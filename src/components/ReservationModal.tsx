@@ -30,6 +30,7 @@ const PACKAGE_PRICES: Record<4 | 8 | 12 | 25, number> = {
 
 const SUITE_PRICE = 200;
 
+// Por enquanto, as datas bloqueadas estão manuais. Depois podemos puxar direto do banco!
 const UNAVAILABLE_DATES = [
   "2026-02-25",
   "2026-02-26",
@@ -103,29 +104,44 @@ export default function ReservationModal({
     }
 
     setIsSubmitting(true);
+    
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      // Puxando as chaves que você configurou no Vercel
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-      const bookings = JSON.parse(localStorage.getItem("bookings") || "[]");
-      const newBooking = {
-        id: Date.now().toString(),
-        customer_name: data.name,
-        customer_email: data.email,
-        customer_phone: data.phone,
-        booking_date: data.date,
-        shift: data.shift,
-        package_size: data.packageSize,
-        suite_included: data.suiteIncluded,
-        total_price: calculateTotal(),
-        status: "pending",
-        created_at: new Date().toISOString(),
-      };
-      bookings.push(newBooking);
-      localStorage.setItem("bookings", JSON.stringify(bookings));
+      if (!supabaseUrl || !supabaseKey) {
+        throw new Error("Chaves do banco de dados não encontradas.");
+      }
+
+      // Enviando a reserva direto para a sua tabela no Supabase
+      const response = await fetch(`${supabaseUrl}/rest/v1/reservas`, {
+        method: 'POST',
+        headers: {
+          'apikey': supabaseKey,
+          'Authorization': `Bearer ${supabaseKey}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({
+          nome_cliente: data.name,
+          telefone: data.phone,
+          tipo_reserva: data.shift,
+          data_reserva: data.date,
+          quantidade_pessoas: data.packageSize,
+          valor_total: calculateTotal(),
+          status: 'pendente'
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error("Erro ao salvar no banco de dados.");
+      }
 
       toast.success(
         "Reserva solicitada com sucesso! Entraremos em contato em breve."
       );
+      
       setStep(1);
       setData({
         date: "",
@@ -138,6 +154,7 @@ export default function ReservationModal({
       });
       onClose();
     } catch (error) {
+      console.error(error);
       toast.error("Erro ao processar a reserva. Tente novamente.");
     } finally {
       setIsSubmitting(false);
@@ -371,7 +388,7 @@ export default function ReservationModal({
                 <div className="space-y-2 text-sm">
                   <p>
                     <span className="font-semibold">Data:</span>{" "}
-                    {new Date(data.date).toLocaleDateString("pt-BR")}
+                    {new Date(data.date).toLocaleDateString("pt-BR", { timeZone: 'UTC' })}
                   </p>
                   <p>
                     <span className="font-semibold">Turno:</span>{" "}
@@ -430,7 +447,7 @@ export default function ReservationModal({
                     value={data.phone}
                     onChange={(e) => setData({ ...data, phone: e.target.value })}
                     className="mt-2"
-                    placeholder="(92) 98453-5475"
+                    placeholder="(92) 99999-9999"
                   />
                 </div>
               </div>
@@ -448,7 +465,7 @@ export default function ReservationModal({
                   disabled={isSubmitting}
                   className="flex-1 bg-[#1B4D3E] text-white hover:bg-[#2D6A54]"
                 >
-                  {isSubmitting ? "Processando..." : "Finalizar Reserva"}
+                  {isSubmitting ? "Enviando..." : "Finalizar Reserva"}
                 </Button>
               </div>
             </div>
